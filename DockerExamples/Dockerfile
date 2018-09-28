@@ -17,7 +17,7 @@ RUN apt-get update && \
     apt-get clean
 WORKDIR /app
 RUN mvn install
-ADD ./DockerExamples-0.0.1-SNAPSHOT.jar /app
+ADD ./DockerExamples-0.0.1-SNAPSHOT.jar /app/target
 
 EXPOSE 8091
 
