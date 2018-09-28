@@ -19,7 +19,7 @@ sh 'docker tag DockerExamples localhost:5000/DockerExamples'
 
 sh 'docker push localhost:5000/DockerExamples'
 
-sh 'docker rmi -f DockerExamples localhost:5000/DockerExamples'
+//sh 'docker rmi -f DockerExamples localhost:5000/DockerExamples'
 
 }
 
