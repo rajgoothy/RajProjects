@@ -1,0 +1,46 @@
+sh 'git --version'
+
+echo "Branch: ${env.BRANCH_NAME}"
+
+// sh 'docker -v'
+
+sh 'printenv'
+
+}
+
+
+stage('Deploy'){
+
+if(env.BRANCH_NAME == 'master'){
+
+sh 'docker build -t DockerExamples --no-cache .'
+
+sh 'docker tag DockerExamples localhost:5000/DockerExamples'
+
+sh 'docker push localhost:5000/DockerExamples'
+
+sh 'docker rmi -f DockerExamples localhost:5000/DockerExamples'
+
+}
+
+}
+
+stage('Production'){
+
+if(env.BRANCH_NAME == 'master'){
+
+// sh 'docker rm $(docker stop $(docker ps -a -q --filter ancestor=localhost:5000/gittest --format="{{.ID}}"))'
+
+sh 'docker run -d -p 8090:8080 --name myproduction localhost:5000/DockerExamples'
+
+}
+
+}
+
+}
+
+catch (err) {
+
+throw err
+
+}
