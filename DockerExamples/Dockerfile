@@ -15,8 +15,9 @@ RUN apt-get update && \
     apt-get install -y openjdk-8-jdk && \
 
     apt-get clean
-
-ADD ./DockerExamples-0.0.1-SNAPSHOT.jar /
+WORKDIR /app
+RUN mvn install
+ADD ./DockerExamples-0.0.1-SNAPSHOT.jar /app
 
 EXPOSE 8091
 
